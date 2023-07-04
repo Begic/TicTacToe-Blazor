@@ -1,0 +1,18 @@
+﻿
+.game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-board {
+    width: 600px;
+    height: 600px;
+    border-style: solid;
+}
+
+.game-row {
+    border-style: solid;
+}
+
+
