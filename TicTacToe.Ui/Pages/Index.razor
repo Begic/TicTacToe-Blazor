@@ -2,34 +2,44 @@
 
 <PageTitle>TicTacToe</PageTitle>
 
-<h3>Willkommen !</h3>
+<div style="text-align: center">
+    <h2>Willkommen beim TicTacToe in Blazor!</h2>
+</div>
 
 <div class="game">
     <div class="game-board">
         <div class="game-row">
-            <button type="button" class="game-square">x</button>
-            <button type="button" class="game-square">x</button>
-            <button type="button" class="game-square">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(1))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(2))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(3))">x</button>
         </div>
         <div class="game-row">
-            <button type="button" class="game-square">x</button>
-            <button type="button" class="game-square">x</button>
-            <button type="button" class="game-square">x</button>
-        </div>  
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(4))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(5))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(6))">x</button>
+        </div>
         <div class="game-row">
-            <button type="button" class="game-square">x</button>
-            <button type="button" class="game-square">x</button>
-            <button type="button" class="game-square">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(7))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(8))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(9))">x</button>
         </div>
     </div>
 </div>
 
 
-
-
 @code
 {
+    public GameLogic Logic { get; set; } = new();
+
+    public List<Point> pointsPlayerX { get; set; } = new();
+    public List<Point> pointsPlayerO { get; set; } = new();
+
     protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    private void OnClickSquare(int squareId)
     {
 
     }
