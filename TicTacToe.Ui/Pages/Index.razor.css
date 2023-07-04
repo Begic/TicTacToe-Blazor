@@ -9,10 +9,27 @@
     width: 600px;
     height: 600px;
     border-style: solid;
+    display: flex;
+    flex-direction: column;
+    background: black;
 }
 
 .game-row {
-    border-style: solid;
+    display: flex;
+    flex-grow: 1;
 }
 
+.game-square {
+    flex-grow: 1;
+    border-radius: 10px;
+    border: none;
+    margin: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out;
+}
 
+    .game-square:hover {
+        box-shadow: 0px 0px 15px white;
+        background: gray
+    }
