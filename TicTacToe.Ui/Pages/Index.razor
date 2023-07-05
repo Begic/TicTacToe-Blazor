@@ -117,7 +117,13 @@
             buttonClass9 = newClass;
         }
 
-        Logic.CheckWinner();
+       var result = Logic.CheckWinner();
+
+        if (!string.IsNullOrEmpty(result))
+        {
+
+            return;
+        }
 
         ChangePlayer(CurrentPlayer);
     }

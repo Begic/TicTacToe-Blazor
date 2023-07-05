@@ -91,11 +91,3 @@
     border-radius: 50%;
     background-color: white;
 }
-
-.game-square-o::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.game-square-o::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-}

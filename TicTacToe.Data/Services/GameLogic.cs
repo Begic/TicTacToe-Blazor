@@ -2,9 +2,12 @@
 {
     public class GameLogic : IGameLogic
     {
-        public void CheckWinner()
+        public string CheckWinner(List<int> pointsPlayerO, List<int> pointsPlayerX)
         {
-            
+
+
+
+            return string.Empty;
         }
     }
 }
