@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IGameLogic GameLogic
 
 <PageTitle>TicTacToe</PageTitle>
 
@@ -9,19 +10,19 @@
 <div class="game">
     <div class="game-board">
         <div class="game-row">
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(1))"></button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(2))"></button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(3))"></button>
-        </div>
-        <div class="game-row">
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(4))"></button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(5))"></button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(6))"></button>
-        </div>
-        <div class="game-row">
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(7))"></button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(8))"></button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(9))"></button>
+            <button type="button" class="@buttonClass1" onclick="@(() => OnClickSquare(1))"></button>
+            <button type="button" class="@buttonClass2" onclick="@(() => OnClickSquare(2))"></button>
+            <button type="button" class="@buttonClass3" onclick="@(() => OnClickSquare(3))"></button>
+        </div>                           
+        <div class="game-row">           
+            <button type="button" class="@buttonClass4" onclick="@(() => OnClickSquare(4))"></button>
+            <button type="button" class="@buttonClass5" onclick="@(() => OnClickSquare(5))"></button>
+            <button type="button" class="@buttonClass6" onclick="@(() => OnClickSquare(6))"></button>
+        </div>                       
+        <div class="game-row">           
+            <button type="button" class="@buttonClass7" onclick="@(() => OnClickSquare(7))"></button>
+            <button type="button" class="@buttonClass8" onclick="@(() => OnClickSquare(8))"></button>
+            <button type="button" class="@buttonClass9" onclick="@(() => OnClickSquare(9))"></button>
         </div>
     </div>
 </div>
@@ -31,10 +32,20 @@
 {
     public GameLogic Logic { get; set; } = new();
 
-    public List<Point> pointsPlayerX { get; set; } = new();
-    public List<Point> pointsPlayerO { get; set; } = new();
+    public List<int> pointsPlayerX { get; set; } = new();
+    public List<int> pointsPlayerO { get; set; } = new();
 
     public Player CurrentPlayer { get; set; }
+
+    private string buttonClass1 = "game-square";
+    private string buttonClass2 = "game-square";
+    private string buttonClass3 = "game-square";
+    private string buttonClass4 = "game-square";
+    private string buttonClass5 = "game-square";
+    private string buttonClass6 = "game-square";
+    private string buttonClass7 = "game-square";
+    private string buttonClass8 = "game-square";
+    private string buttonClass9 = "game-square";
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,12 +65,59 @@
         }
     }
 
-
     private void OnClickSquare(int squareId)
     {
+        var newClass = string.Empty;
 
+        if (CurrentPlayer == Player.X)
+        {
+            newClass = "game-square-x";
+            pointsPlayerX.Add(squareId);
+        }
+        else if(CurrentPlayer == Player.O)
+        {
+            newClass = "game-square-o";
+            pointsPlayerO.Add(squareId);
+        }
 
+        if (squareId == 1)
+        {
+            buttonClass1 = newClass;
+        }
+        else if (squareId == 2)
+        {
+            buttonClass2 = newClass;
+        }
+        else if (squareId == 3)
+        {
+            buttonClass3 = newClass;
+        }
+        else if (squareId == 4)
+        {
+            buttonClass4 = newClass;
+        }
+        else if (squareId == 5)
+        {
+            buttonClass5 = newClass;
+        }
+        else if (squareId == 6)
+        {
+            buttonClass6 = newClass;
+        }
+        else if (squareId == 7)
+        {
+            buttonClass7 = newClass;
+        }
+        else if (squareId == 8)
+        {
+            buttonClass8 = newClass;
+        }
+        else if (squareId == 9)
+        {
+            buttonClass9 = newClass;
+        }
 
+        Logic.CheckWinner();
 
         ChangePlayer(CurrentPlayer);
     }

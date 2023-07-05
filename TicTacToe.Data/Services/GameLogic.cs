@@ -2,6 +2,9 @@
 {
     public class GameLogic : IGameLogic
     {
-
+        public void CheckWinner()
+        {
+            
+        }
     }
 }
