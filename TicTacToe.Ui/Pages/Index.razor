@@ -9,19 +9,19 @@
 <div class="game">
     <div class="game-board">
         <div class="game-row">
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(1))">x</button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(2))">x</button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(3))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(1))"></button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(2))"></button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(3))"></button>
         </div>
         <div class="game-row">
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(4))">x</button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(5))">x</button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(6))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(4))"></button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(5))"></button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(6))"></button>
         </div>
         <div class="game-row">
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(7))">x</button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(8))">x</button>
-            <button type="button" class="game-square" onclick="@(() => OnClickSquare(9))">x</button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(7))"></button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(8))"></button>
+            <button type="button" class="game-square" onclick="@(() => OnClickSquare(9))"></button>
         </div>
     </div>
 </div>
@@ -34,13 +34,33 @@
     public List<Point> pointsPlayerX { get; set; } = new();
     public List<Point> pointsPlayerO { get; set; } = new();
 
+    public Player CurrentPlayer { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-
+        CurrentPlayer = Player.X;
     }
+
+    public void ChangePlayer(Player player)
+    {
+        if (player == Player.X)
+        {
+            CurrentPlayer = Player.O;
+        }
+
+        if (player == Player.O)
+        {
+            CurrentPlayer = Player.X;
+        }
+    }
+
 
     private void OnClickSquare(int squareId)
     {
 
+
+
+
+        ChangePlayer(CurrentPlayer);
     }
 }

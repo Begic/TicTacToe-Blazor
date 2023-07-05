@@ -1,3 +1,5 @@
+using TicTacToe.Data.Services;
+
 namespace TicTacToe.Ui;
 
 public class Program
@@ -8,24 +10,20 @@ public class Program
 
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
-        //builder.Services.AddSingleton<WeatherForecastService>();
+        builder.Services.AddSingleton<IGameLogic, GameLogic>();
+
 
         var app = builder.Build();
-
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
         }
 
         app.UseHttpsRedirection();
-
         app.UseStaticFiles();
-
         app.UseRouting();
-
         app.MapBlazorHub();
         app.MapFallbackToPage("/_Host");
-
         app.Run();
     }
 }
