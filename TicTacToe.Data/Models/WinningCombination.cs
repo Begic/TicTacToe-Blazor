@@ -17,5 +17,5 @@ public static class WinningCombination
         });
     }
 
-    public static List<List<int>> Combination { get; set; }
+    public static List<List<int>> Combination { get; set; } = new();
 }

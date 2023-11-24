@@ -1,4 +1,5 @@
-﻿@page "/"
+﻿@page "/game"
+
 @inject IGameLogic GameLogic
 
 <PageTitle>TicTacToe</PageTitle>
@@ -32,8 +33,6 @@
 
 @code
 {
-    public GameLogic Logic { get; set; } = new();
-
     public List<int> pointsPlayerX { get; set; } = new();
     public List<int> pointsPlayerO { get; set; } = new();
 
@@ -119,7 +118,7 @@
             buttonClass9 = newClass;
         }
 
-       var result = Logic.CheckWinner(pointsPlayerO, pointsPlayerX);
+       var result = GameLogic.CheckWinner(pointsPlayerO, pointsPlayerX);
 
         if (result == Player.O)
         {
