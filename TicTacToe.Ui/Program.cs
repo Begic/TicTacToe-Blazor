@@ -1,3 +1,4 @@
+using MudBlazor.Services;
 using TicTacToe.Data.Services;
 
 namespace TicTacToe.Ui;
@@ -10,6 +11,7 @@ public class Program
 
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
+        builder.Services.AddMudServices();
         builder.Services.AddSingleton<IGameLogic, GameLogic>();
 
 
