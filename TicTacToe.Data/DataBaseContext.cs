@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TicTacToe.Data.Entities;
 
 namespace TicTacToe.Data;
 
 public class DataBaseContext : DbContext
 {
-    
-    
-    
+    public DbSet<Score> Scores { get; set; }
     public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
     {
         
