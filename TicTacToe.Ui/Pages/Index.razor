@@ -28,6 +28,8 @@
 </div>
 
 
+
+
 @code
 {
     public GameLogic Logic { get; set; } = new();
@@ -117,12 +119,16 @@
             buttonClass9 = newClass;
         }
 
-       var result = Logic.CheckWinner();
+       var result = Logic.CheckWinner(pointsPlayerO, pointsPlayerX);
 
-        if (!string.IsNullOrEmpty(result))
+        if (result == Player.O)
         {
 
-            return;
+        }
+
+        if (result == Player.X)
+        {
+            
         }
 
         ChangePlayer(CurrentPlayer);

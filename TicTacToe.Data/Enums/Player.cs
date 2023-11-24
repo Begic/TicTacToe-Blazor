@@ -2,6 +2,7 @@
 
 public enum Player  
 {
-    X = 0,
-    O = 1
+    Default = 0,
+    X = 1,
+    O = 2
 }

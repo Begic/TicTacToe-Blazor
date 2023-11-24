@@ -1,6 +1,8 @@
-﻿namespace TicTacToe.Data.Services;
+﻿using TicTacToe.Data.Enums;
+
+namespace TicTacToe.Data.Services;
 
 public interface IGameLogic
 {
-    string CheckWinner(List<int> pointsPlayerO, List<int> pointsPlayerX);
+    Player CheckWinner(List<int> pointsPlayerO, List<int> pointsPlayerX);
 }
