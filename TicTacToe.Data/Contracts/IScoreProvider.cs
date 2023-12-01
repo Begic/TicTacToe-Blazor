@@ -1,6 +1,9 @@
-﻿namespace TicTacToe.Data.Contracts;
+﻿using TicTacToe.Data.Entities;
+using TicTacToe.Data.Models;
 
-public interface IScoreProvider
+namespace TicTacToe.Data.Contracts;
+
+public interface IHighScoreProvider
 {
-    
+    Task<List<ScoreInfo>> GetAllHighScores();
 }

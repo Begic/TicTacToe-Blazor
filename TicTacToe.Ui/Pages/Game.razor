@@ -4,9 +4,7 @@
 
 <PageTitle>TicTacToe</PageTitle>
 
-<div style="text-align: center">
-    <h2>Willkommen beim TicTacToe in Blazor!</h2>
-</div>
+<MudText Typo="Typo.h2" Style="text-align: center" Class="mb-2">Willkommen beim TicTacToe in Blazor!</MudText>
 
 <div class="game">
     <div class="game-board">
@@ -14,21 +12,19 @@
             <button type="button" class="@buttonClass1" onclick="@(() => OnClickSquare(1))"></button>
             <button type="button" class="@buttonClass2" onclick="@(() => OnClickSquare(2))"></button>
             <button type="button" class="@buttonClass3" onclick="@(() => OnClickSquare(3))"></button>
-        </div>                           
-        <div class="game-row">           
+        </div>
+        <div class="game-row">
             <button type="button" class="@buttonClass4" onclick="@(() => OnClickSquare(4))"></button>
             <button type="button" class="@buttonClass5" onclick="@(() => OnClickSquare(5))"></button>
             <button type="button" class="@buttonClass6" onclick="@(() => OnClickSquare(6))"></button>
-        </div>                       
-        <div class="game-row">           
+        </div>
+        <div class="game-row">
             <button type="button" class="@buttonClass7" onclick="@(() => OnClickSquare(7))"></button>
             <button type="button" class="@buttonClass8" onclick="@(() => OnClickSquare(8))"></button>
             <button type="button" class="@buttonClass9" onclick="@(() => OnClickSquare(9))"></button>
         </div>
     </div>
 </div>
-
-
 
 
 @code
@@ -75,7 +71,7 @@
             newClass = "game-square-x";
             pointsPlayerX.Add(squareId);
         }
-        else if(CurrentPlayer == Player.O)
+        else if (CurrentPlayer == Player.O)
         {
             newClass = "game-square-o";
             pointsPlayerO.Add(squareId);
@@ -118,16 +114,14 @@
             buttonClass9 = newClass;
         }
 
-       var result = GameLogic.CheckWinner(pointsPlayerO, pointsPlayerX);
+        var result = GameLogic.CheckWinner(pointsPlayerO, pointsPlayerX);
 
         if (result == Player.O)
         {
-
         }
 
         if (result == Player.X)
         {
-            
         }
 
         ChangePlayer(CurrentPlayer);

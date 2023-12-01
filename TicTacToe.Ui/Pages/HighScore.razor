@@ -1,10 +1,32 @@
 ﻿@page "/highscore"
+@inject IHighScoreProvider HighScoreProvider
 
-<h3>HighScore</h3>
+<PageTitle>HighScore</PageTitle>
 
+<MudText Typo="Typo.h2" Style="text-align: center" Class="mb-2">HighScore</MudText>
 
+<LoadingPage IsLoading="@(allHighScores == null)">
+    <MudDataGrid Items="@allHighScores"
+                 Filterable="@false"
+                 Groupable="@false"
+                 Dense="@true"
+                 Bordered="@true"
+                 Hover="@true"
+                 Striped="@true">
+        <Columns>
+            <PropertyColumn Property="@(x => x.PlayTime)"/>
+            <PropertyColumn Property="@(x => x.PlayerName)"/>
+            <PropertyColumn Property="@(x => x.Date)"/>
+        </Columns>
+    </MudDataGrid>
+</LoadingPage>
 
 @code
 {
-    
+    private List<ScoreInfo> allHighScores;
+
+    protected override async Task OnInitializedAsync()
+    {
+        allHighScores = await HighScoreProvider.GetAllHighScores();
+    }
 }
