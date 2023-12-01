@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using MudBlazor;
 using MudBlazor.Services;
 using TicTacToe.Data;
+using TicTacToe.Data.Contracts;
+using TicTacToe.Data.Providers;
 using TicTacToe.Data.Services;
 
 namespace TicTacToe.Ui;
@@ -19,6 +21,7 @@ public class Program
             conf => conf.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight);
         
         builder.Services.AddSingleton<IGameLogic, GameLogic>();
+        builder.Services.AddSingleton<IScoreProvider, ScoreProvider>();
         
         builder.Services.AddDbContextFactory<DataBaseContext>(options =>
             options.UseSqlite(@"DataSource=MyDataBase.db;"));

@@ -9,8 +9,7 @@ public class DataBaseContext : DbContext
     public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
     {
     }
-
-
+    
     public DbSet<Score> Scores { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
