@@ -21,8 +21,9 @@ public class Program
         builder.Services.AddMudServices(
             conf => conf.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight);
 
-        builder.Services.AddSingleton<IGameLogic, GameLogic>();
-        builder.Services.AddSingleton<IHighScoreProvider, HighScoreProvider>();
+        builder.Services.AddTransient<IGameLogic, GameLogic>();
+        builder.Services.AddTransient<IHighScoreProvider, HighScoreProvider>();
+        builder.Services.AddScoped<UserService>();
 
         builder.Services.AddDbContextFactory<DataBaseContext>(options =>
             options.UseSqlite(@"DataSource=MyDataBase.db;"));

@@ -1,6 +1,6 @@
 ﻿using TicTacToe.Data.Enums;
 
-namespace TicTacToe.Data.Services;
+namespace TicTacToe.Data.Contracts;
 
 public interface IGameLogic
 {
