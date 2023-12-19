@@ -9,9 +9,7 @@
 <MudText Typo="Typo.h5" Style="text-align: center" Class="mb-2">Settings</MudText>
 
 <EditForm Model="@PlayerModel" OnValidSubmit="@SavePlayerSettings">
-    
     <FluentValidationValidator />
-
     <MudGrid>
         <MudItem md="12">
             <MudSwitch @bind-Checked="@PlayerModel.PlayVsHuman" Label="@(PlayerModel.PlayVsHuman ? "Mensch" : "Künstliche Intelligenz")"/>

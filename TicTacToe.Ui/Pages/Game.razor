@@ -1,6 +1,7 @@
 ﻿@page "/game"
 
 @inject IGameLogic GameLogic
+@inject UserService UserService
 
 <PageTitle>TicTacToe</PageTitle>
 
@@ -118,10 +119,12 @@
 
         if (result == Player.O)
         {
+
         }
 
         if (result == Player.X)
         {
+            
         }
 
         ChangePlayer(CurrentPlayer);
