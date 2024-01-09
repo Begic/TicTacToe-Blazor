@@ -8,12 +8,12 @@ namespace TicTacToe.Data.Services
     {
         public Player CheckWinner(List<int> pointsPlayerO, List<int> pointsPlayerX)
         {
-            if (WinningCombination.Combination.Contains(pointsPlayerX))
+            if (WinningCombination.Combination.Any(z => z.All(pointsPlayerX.Contains) && z.Count == pointsPlayerX.Count))
             {
                 return Player.X;
             }
 
-            if (WinningCombination.Combination.Contains(pointsPlayerO))
+            if (WinningCombination.Combination.Any(z => z.All(pointsPlayerO.Contains) && z.Count == pointsPlayerO.Count))
             {
                 return Player.O;
             }

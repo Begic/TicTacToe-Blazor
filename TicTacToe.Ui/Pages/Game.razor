@@ -1,7 +1,9 @@
 ﻿@page "/game"
+@using TicTacToe.Ui.Dialogs
 
 @inject IGameLogic GameLogic
 @inject UserService UserService
+@inject IDialogService DialogService
 
 <PageTitle>TicTacToe</PageTitle>
 
@@ -70,16 +72,30 @@
 
         var result = GameLogic.CheckWinner(pointsPlayerO, pointsPlayerX);
 
-        if (result == Player.O)
-        {
-
-        }
-
         if (result == Player.X)
         {
-            
+            OpenWinningDialog(result);
+        }
+
+        if (result == Player.O)
+        {
+            OpenWinningDialog(result);
         }
 
         CurrentPlayer = CurrentPlayer == Player.X ? Player.O : Player.X;
+    }
+
+    private void OpenWinningDialog(Player winner)
+    {
+        DialogService.Show<DialogShowWinner>(string.Empty, new DialogParameters
+        {
+            {nameof(DialogShowWinner.Winner), winner},
+        }, new DialogOptions
+        {
+            DisableBackdropClick = true,
+            Position = DialogPosition.Center,
+            CloseButton = false,
+            CloseOnEscapeKey = false,
+        });
     }
 }

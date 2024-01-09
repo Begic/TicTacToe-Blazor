@@ -1,0 +1,68 @@
+﻿@inject UserService UserService
+@inject NavigationManager NavigationManager
+
+@inject IHighScoreProvider HighScoreProvider
+@inject ISnackbar Toaster
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Style="color: yellow" Icon="@Icons.Material.Filled.Star" />
+            Player @winnerName is the Winner !
+            <MudIcon Style="color: yellow" Icon="@Icons.Material.Filled.Star" />
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @* TODO *@
+    </DialogContent>
+    <DialogActions>
+        @if (!UserService.CurrentPlayers.PlayVsHuman)
+        {
+            <MudButton Color="Color.Success" EndIcon="@Icons.Material.Filled.Save" OnClick="OnClickSave">Save</MudButton>
+        }
+        <MudButton Color="Color.Secondary" EndIcon="@Icons.Material.Filled.Repeat" OnClick="OnClickNewGame">New Game</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code
+{
+    [Parameter] public Player Winner { get; set; }
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    private string winnerName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Winner == Player.X)
+        {
+            winnerName = UserService.CurrentPlayers.NamePlayerOne;
+        }
+
+        if (Winner == Player.O)
+        {
+            winnerName = UserService.CurrentPlayers.NamePlayerTwo;
+        }
+    }
+
+    private async Task OnClickSave()
+    {
+        await HighScoreProvider.SaveHighScore(Winner, winnerName);
+        Toaster.Add("Highscore saved", Severity.Success);
+        CloseDialog();
+        NavigationManager.NavigateTo("/highscore");
+    }
+
+    private void OnClickNewGame()
+    {
+        Toaster.Add("New Game started", Severity.Success);
+        CloseDialog();
+        NavigationManager.NavigateTo("/");
+    }
+
+    public void CloseDialog()
+    {
+        UserService.CurrentPlayers = new();
+        MudDialog.Close();
+    }
+}
