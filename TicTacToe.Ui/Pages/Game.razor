@@ -7,7 +7,7 @@
 
 <MudText Typo="Typo.h5" Style="text-align: center" Class="mb-2">Willkommen beim TicTacToe in Blazor!</MudText>
 
-<div class="game">
+<div class="game" style="--x-color: @UserService.CurrentPlayers.ColorPlayerOne; --o-color: @UserService.CurrentPlayers.ColorPlayerTwo">
     <div class="game-board">
         @for (var row = 0; row < 3; row++)
         {
