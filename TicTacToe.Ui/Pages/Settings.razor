@@ -55,7 +55,7 @@
 
 @code
 {
-    public PlayerInfo PlayerModel { get; set; } = new();
+    private readonly PlayerInfo PlayerModel = new();
 
     protected override async Task OnInitializedAsync()
     {

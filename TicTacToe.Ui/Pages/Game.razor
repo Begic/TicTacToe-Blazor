@@ -27,16 +27,16 @@
 
 @code
 {
-    public List<int> pointsPlayerX { get; set; } = new();
-    public List<int> pointsPlayerO { get; set; } = new();
+    private List<int> pointsPlayerX = new();
+    private List<int> pointsPlayerO = new();
 
-    public Player CurrentPlayer { get; set; }
+    private Player currentPlayer;
 
     private Dictionary<int, string> buttonClasses = new();
 
     protected override async Task OnInitializedAsync()
     {
-        CurrentPlayer = Player.X;
+        currentPlayer = Player.X;
     }
 
     private string GetButtonClass(int squareId)
@@ -50,7 +50,7 @@
 
     private void OnClickSquare(int squareId)
     {
-        var newButtonClass = CurrentPlayer == Player.X ? "game-square-x" : "game-square-o";
+        var newButtonClass = currentPlayer == Player.X ? "game-square-x" : "game-square-o";
 
         if (buttonClasses.ContainsKey(squareId))
         {
@@ -61,7 +61,7 @@
             buttonClasses.Add(squareId, newButtonClass);
         }
 
-        if (CurrentPlayer == Player.X)
+        if (currentPlayer == Player.X)
         {
             pointsPlayerX.Add(squareId);
         }
@@ -82,7 +82,7 @@
             OpenWinningDialog(result);
         }
 
-        CurrentPlayer = CurrentPlayer == Player.X ? Player.O : Player.X;
+        currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
     }
 
     private void OpenWinningDialog(Player winner)
