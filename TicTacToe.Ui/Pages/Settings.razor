@@ -12,19 +12,19 @@
     <FluentValidationValidator />
     <MudGrid>
         <MudItem md="12">
-            <MudSwitch @bind-Checked="@PlayerModel.PlayVsHuman" Label="@(PlayerModel.PlayVsHuman ? "Mensch" : "Künstliche Intelligenz")"/>
+            <MudSwitch @bind-Checked="@PlayerModel.PlayVsHuman" Label="@(PlayerModel.PlayVsHuman ? "Human" : "Artificial intelligence")" />
         </MudItem>
 
         <MudItem md="6">
             <MudGrid>
                 <MudItem md="12">
-                    <MudText Typo="Typo.h6">Spieler 1</MudText>
+                    <MudText Typo="Typo.h6">Player 1</MudText>
                 </MudItem>
                 <MudItem md="6">
-                    <MudTextField @bind-Value="@PlayerModel.NamePlayerOne" For="@(() => PlayerModel.NamePlayerOne)" Label="Name des Spielers" Variant="Variant.Outlined"/>
+                    <MudTextField @bind-Value="@PlayerModel.NamePlayerOne" For="@(() => PlayerModel.NamePlayerOne)" Label="Name of the Player" Variant="Variant.Outlined"/>
                 </MudItem>
                 <MudItem md="6">
-                    <MudColorPicker Label="Farbe" @bind-Text="PlayerModel.ColorPlayerOne" ColorPickerView="ColorPickerView.GridCompact" />
+                    <MudColorPicker Label="Color" @bind-Text="PlayerModel.ColorPlayerOne" ColorPickerView="ColorPickerView.GridCompact" />
                     @* For="@(() =>PlayerModel.ColorPlayerOne)" *@
                 </MudItem>
             </MudGrid>
@@ -35,13 +35,13 @@
             <MudItem md="6">
                 <MudGrid>
                     <MudItem md="12">
-                        <MudText Typo="Typo.h6">Spieler 2</MudText>
+                        <MudText Typo="Typo.h6">Player 2</MudText>
                     </MudItem>
                     <MudItem md="6">
-                        <MudTextField @bind-Value="@PlayerModel.NamePlayerTwo" For="@(() => PlayerModel.NamePlayerTwo)" Label="Name des Spielers" Variant="Variant.Outlined"/>
+                        <MudTextField @bind-Value="@PlayerModel.NamePlayerTwo" For="@(() => PlayerModel.NamePlayerTwo)" Label="Name of the Player" Variant="Variant.Outlined" />
                     </MudItem>
                     <MudItem md="6">
-                        <MudColorPicker Label="Farbe" @bind-Text="PlayerModel.ColorPlayerTwo" ColorPickerView="ColorPickerView.GridCompact" />
+                        <MudColorPicker Label="Color" @bind-Text="PlayerModel.ColorPlayerTwo" ColorPickerView="ColorPickerView.GridCompact" />
                         @* For="@(() => PlayerModel.ColorPlayerTwo)" *@
                     </MudItem>
                 </MudGrid>
@@ -75,7 +75,7 @@
             UserService.CurrentPlayers.ColorPlayerTwo = PlayerModel.ColorPlayerTwo;
         }
 
-        Toaster.Add("Einstellungen gespeichert", Severity.Success);
+        Toaster.Add("Settings saved", Severity.Success);
 
         NavigationManager.NavigateTo("/game");
     }
