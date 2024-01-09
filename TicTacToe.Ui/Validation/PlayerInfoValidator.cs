@@ -8,12 +8,10 @@ public class PlayerInfoValidator : AbstractValidator<PlayerInfo>
     public PlayerInfoValidator()
     {
         RuleFor(x => x.NamePlayerOne).NotEmpty().NotNull();
-        RuleFor(x => x.ColorPlayerOne).NotEmpty().NotNull();
 
         When(x => x.PlayVsHuman, () =>
         {
             RuleFor(x => x.NamePlayerTwo).NotEmpty().NotNull();
-            RuleFor(x => x.ColorPlayerTwo).NotEmpty().NotNull();
         });
     }
 }

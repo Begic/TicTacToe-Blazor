@@ -4,7 +4,8 @@ public class PlayerInfo
 {
     public string NamePlayerOne { get; set; }
     public string NamePlayerTwo { get; set; }
-    public string? ColorPlayerOne { get; set; }
-    public string? ColorPlayerTwo { get; set; }
+    public string? ColorPlayerOne { get; set; } = "#000000";
+    public string? ColorPlayerTwo { get; set; } = "#000000";
+    
     public bool PlayVsHuman { get; set; }
 }

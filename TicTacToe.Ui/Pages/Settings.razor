@@ -25,7 +25,6 @@
                 </MudItem>
                 <MudItem md="6">
                     <MudColorPicker Label="Color" @bind-Text="PlayerModel.ColorPlayerOne" ColorPickerView="ColorPickerView.GridCompact" />
-                    @* For="@(() =>PlayerModel.ColorPlayerOne)" *@
                 </MudItem>
             </MudGrid>
         </MudItem>
@@ -42,7 +41,6 @@
                     </MudItem>
                     <MudItem md="6">
                         <MudColorPicker Label="Color" @bind-Text="PlayerModel.ColorPlayerTwo" ColorPickerView="ColorPickerView.GridCompact" />
-                        @* For="@(() => PlayerModel.ColorPlayerTwo)" *@
                     </MudItem>
                 </MudGrid>
             </MudItem>
@@ -69,7 +67,7 @@
         UserService.CurrentPlayers.NamePlayerOne = PlayerModel.NamePlayerOne;
         UserService.CurrentPlayers.ColorPlayerOne = PlayerModel.ColorPlayerOne;
 
-        if (!PlayerModel.PlayVsHuman)
+        if (PlayerModel.PlayVsHuman)
         {
             UserService.CurrentPlayers.NamePlayerTwo = PlayerModel.NamePlayerTwo;
             UserService.CurrentPlayers.ColorPlayerTwo = PlayerModel.ColorPlayerTwo;
