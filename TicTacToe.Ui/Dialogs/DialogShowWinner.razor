@@ -13,7 +13,10 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        Hier sollte dann irgendwas stehn :)
+        @if (!UserService.CurrentPlayers.PlayVsHuman)
+        {
+         // TODO   
+        }
     </DialogContent>
     <DialogActions>
         @if (!UserService.CurrentPlayers.PlayVsHuman)
