@@ -25,18 +25,22 @@
     </div>
 </div>
 
+<MudText Typo="@Typo.h6" Style="text-align: center">
+    It's player <b>@currentPlayerName</b>'s turn
+</MudText>
+
 @code
 {
-    private List<int> pointsPlayerX = new();
-    private List<int> pointsPlayerO = new();
-
+    private readonly List<int> pointsPlayerX = new();
+    private readonly List<int> pointsPlayerO = new();
     private Player currentPlayer;
-
-    private Dictionary<int, string> buttonClasses = new();
+    private string currentPlayerName;
+    private readonly Dictionary<int, string> buttonClasses = new();
 
     protected override async Task OnInitializedAsync()
     {
         currentPlayer = Player.X;
+        currentPlayerName = UserService.CurrentPlayers.NamePlayerOne;
     }
 
     private string GetButtonClass(int squareId)
@@ -45,6 +49,7 @@
         {
             return buttonClasses[squareId];
         }
+
         return "game-square";
     }
 
@@ -75,27 +80,53 @@
         if (result == Player.X)
         {
             OpenWinningDialog(result);
+            return;
         }
 
         if (result == Player.O)
         {
             OpenWinningDialog(result);
+            return;
+        }
+        
+        ChangeCurrentPalyer();
+    }
+
+    private void ChangeCurrentPalyer()
+    {
+        if (currentPlayer == Player.X)
+        {
+            if (UserService.CurrentPlayers.PlayVsHuman)
+            {
+                currentPlayerName = UserService.CurrentPlayers.NamePlayerTwo;
+            }
+            else
+            {
+                currentPlayerName = "Artificial intelligence";
+            }
         }
 
-        currentPlayer = currentPlayer == Player.X ? Player.O : Player.X;
+        if (currentPlayer == Player.O)
+        {
+            currentPlayerName = UserService.CurrentPlayers.NamePlayerOne;
+        }
+
+        currentPlayer = currentPlayer == Player.X ? currentPlayer = Player.O : currentPlayer = Player.X;
+        
+        StateHasChanged();
     }
 
     private void OpenWinningDialog(Player winner)
     {
         DialogService.Show<DialogShowWinner>(string.Empty, new DialogParameters
         {
-            {nameof(DialogShowWinner.Winner), winner},
+            { nameof(DialogShowWinner.Winner), winner }
         }, new DialogOptions
         {
             DisableBackdropClick = true,
             Position = DialogPosition.Center,
             CloseButton = false,
-            CloseOnEscapeKey = false,
+            CloseOnEscapeKey = false
         });
     }
 }

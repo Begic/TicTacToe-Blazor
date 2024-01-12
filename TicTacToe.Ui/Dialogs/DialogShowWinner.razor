@@ -13,14 +13,14 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        @* TODO *@
+        Hier sollte dann irgendwas stehn :)
     </DialogContent>
     <DialogActions>
         @if (!UserService.CurrentPlayers.PlayVsHuman)
         {
-            <MudButton Color="Color.Success" EndIcon="@Icons.Material.Filled.Save" OnClick="OnClickSave">Save</MudButton>
+            <MudButton Color="@Color.Success" Variant="@Variant.Filled" EndIcon="@Icons.Material.Filled.Save" OnClick="@OnClickSave">Save</MudButton>
         }
-        <MudButton Color="Color.Secondary" EndIcon="@Icons.Material.Filled.Repeat" OnClick="OnClickNewGame">New Game</MudButton>
+        <MudButton Color="@Color.Error" Variant="@Variant.Filled" EndIcon="@Icons.Material.Filled.Repeat" OnClick="@OnClickNewGame">New Game</MudButton>
     </DialogActions>
 </MudDialog>
 
