@@ -13,9 +13,9 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        @if (!UserService.CurrentPlayers!.PlayVsHuman)
+        @if (!UserService.CurrentPlayers!.PlayVsHuman && PlayedTime != null)
         {
-         // TODO   
+            <MudText>Your best time is @PlayedTime sec.</MudText>
         }
     </DialogContent>
     <DialogActions>
@@ -31,6 +31,7 @@
 @code
 {
     [Parameter] public Player Winner { get; set; }
+    [Parameter] public double? PlayedTime { get; set; }
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
     private string winnerName;
@@ -39,12 +40,12 @@
     {
         if (Winner == Player.X)
         {
-            winnerName = UserService.CurrentPlayers.NamePlayerOne;
+            winnerName = UserService.CurrentPlayers?.NamePlayerOne;
         }
 
         if (Winner == Player.O)
         {
-            winnerName = UserService.CurrentPlayers.NamePlayerTwo;
+            winnerName = UserService.CurrentPlayers?.NamePlayerTwo;
         }
 
         if (Winner == Player.Default)
@@ -55,7 +56,7 @@
 
     private async Task OnClickSave()
     {
-        await HighScoreProvider.SaveHighScore(Winner, winnerName);
+        await HighScoreProvider.SaveHighScore(Winner, winnerName, PlayedTime);
         Toaster.Add("Highscore saved", Severity.Success);
         CloseDialog();
         NavigationManager.NavigateTo("/highscore");

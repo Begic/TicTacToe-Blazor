@@ -23,18 +23,19 @@ public class HighScoreProvider : IHighScoreProvider
             Id = x.Id,
             Date = x.Date,
             PlayerName = x.PlayerName,
-            PlayTime = x.PlayTime
+            PlayTime = x.PlayTime.Value
         }).OrderByDescending(x=> x.PlayTime).ToListAsync();
     }
 
-    public async Task SaveHighScore(Player winner, string winnerName)
+    public async Task SaveHighScore(Player winner, string winnerName, double? playedTime)
     {
         await using var db = await factory.CreateDbContextAsync().ConfigureAwait(false);
+        
         await db.Scores.AddAsync(new Score
         {
             PlayerName = winnerName,
             Date = DateTime.Now,
-            PlayTime = 88
+            PlayTime = playedTime
         });
 
         await db.SaveChangesAsync();

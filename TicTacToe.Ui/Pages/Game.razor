@@ -1,5 +1,4 @@
 ﻿@page "/game"
-@using TicTacToe.Ui.Dialogs
 
 @inject IGameLogic GameLogic
 @inject UserService UserService
@@ -36,9 +35,11 @@
     private Player currentPlayer;
     private string currentPlayerName;
     private readonly Dictionary<int, string> buttonClasses = new();
+    private Stopwatch stopwatch;
 
     protected override async Task OnInitializedAsync()
     {
+        stopwatch = new Stopwatch();
         currentPlayer = Player.X;
         currentPlayerName = !string.IsNullOrEmpty(UserService.CurrentPlayers?.NamePlayerOne) ? UserService.CurrentPlayers.NamePlayerOne : string.Empty;
     }
@@ -55,6 +56,11 @@
 
     private void OnClickSquare(int squareId)
     {
+        if (!UserService.CurrentPlayers!.PlayVsHuman && !stopwatch.IsRunning)
+        {
+            stopwatch.Start();
+        }
+        
         var newButtonClass = currentPlayer == Player.X ? "game-square-x" : "game-square-o";
 
         if (buttonClasses.ContainsKey(squareId))
@@ -84,22 +90,31 @@
 
         if (result == Player.X)
         {
-            OpenWinningDialog(result);
+            var time = StopStopwatch();
+            OpenWinningDialog(result, time);
             return;
         }
 
         if (result == Player.O)
         {
-            OpenWinningDialog(result);
+            var time = StopStopwatch();
+            OpenWinningDialog(result, time);
             return;
         }
 
         if (pointsPlayerX.Count + pointsPlayerO.Count >= 9)
         {
-            OpenWinningDialog(result);
+            var time = StopStopwatch();
+            OpenWinningDialog(result, time);
         }
         
         ChangeCurrentPalyer();
+    }
+
+    private int StopStopwatch()
+    {
+        stopwatch.Stop();
+        return stopwatch.Elapsed.Seconds;
     }
 
     private void VersusArtificialIntelligenceLogic()
@@ -146,11 +161,12 @@
         StateHasChanged();
     }
 
-    private void OpenWinningDialog(Player winner)
+    private void OpenWinningDialog(Player winner, double? playedTime)
     {
         DialogService.Show<DialogShowWinner>(string.Empty, new DialogParameters
         {
-            { nameof(DialogShowWinner.Winner), winner }
+            { nameof(DialogShowWinner.Winner), winner },
+            { nameof(DialogShowWinner.PlayedTime), playedTime }
         }, new DialogOptions
         {
             DisableBackdropClick = true,

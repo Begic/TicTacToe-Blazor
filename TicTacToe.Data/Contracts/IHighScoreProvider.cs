@@ -6,5 +6,5 @@ namespace TicTacToe.Data.Contracts;
 public interface IHighScoreProvider
 {
     Task<List<ScoreInfo>> GetAllHighScores();
-    Task SaveHighScore(Player winner, string winnerName);
+    Task SaveHighScore(Player winner, string winnerName, double? playedTime);
 }
