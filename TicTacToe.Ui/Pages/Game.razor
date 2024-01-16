@@ -9,7 +9,7 @@
 
 <MudText Typo="Typo.h5" Style="text-align: center" Class="mb-2">Willkommen beim TicTacToe in Blazor!</MudText>
 
-<div class="game" style="--x-color: @UserService.CurrentPlayers.ColorPlayerOne; --o-color: @UserService.CurrentPlayers.ColorPlayerTwo">
+<div class="game" style="--x-color: @UserService.CurrentPlayers?.ColorPlayerOne; --o-color: @UserService.CurrentPlayers?.ColorPlayerTwo">
     <div class="game-board">
         @for (var row = 0; row < 3; row++)
         {
@@ -40,7 +40,7 @@
     protected override async Task OnInitializedAsync()
     {
         currentPlayer = Player.X;
-        currentPlayerName = UserService.CurrentPlayers.NamePlayerOne;
+        currentPlayerName = !string.IsNullOrEmpty(UserService.CurrentPlayers?.NamePlayerOne) ? UserService.CurrentPlayers.NamePlayerOne : string.Empty;
     }
 
     private string GetButtonClass(int squareId)
@@ -75,6 +75,40 @@
             pointsPlayerO.Add(squareId);
         }
 
+        if (UserService.CurrentPlayers!.PlayVsHuman)
+        {
+            VersusHumanLogic(squareId);
+        }
+        else
+        {
+            VersusArtificialIntelligenceLogic();
+        }
+
+        ChangeCurrentPalyer();
+    }
+
+    private void VersusArtificialIntelligenceLogic()
+    {
+        var newSquareId = GameLogic.GetNextMove(pointsPlayerX, pointsPlayerO);
+
+        ChangeCurrentPalyer();
+
+        var newButtonClass2 = currentPlayer == Player.X ? "game-square-x" : "game-square-o";
+
+        if (buttonClasses.ContainsKey(newSquareId))
+        {
+            buttonClasses[newSquareId] = newButtonClass2;
+        }
+        else
+        {
+            buttonClasses.Add(newSquareId, newButtonClass2);
+        }
+
+        pointsPlayerO.Add(newSquareId);
+    }
+
+    private void VersusHumanLogic(int squareId)
+    {
         var result = GameLogic.CheckWinner(pointsPlayerO, pointsPlayerX);
 
         if (result == Player.X)
@@ -88,15 +122,13 @@
             OpenWinningDialog(result);
             return;
         }
-        
-        ChangeCurrentPalyer();
     }
 
     private void ChangeCurrentPalyer()
     {
         if (currentPlayer == Player.X)
         {
-            if (UserService.CurrentPlayers.PlayVsHuman)
+            if (UserService.CurrentPlayers!.PlayVsHuman)
             {
                 currentPlayerName = UserService.CurrentPlayers.NamePlayerTwo;
             }
@@ -108,11 +140,11 @@
 
         if (currentPlayer == Player.O)
         {
-            currentPlayerName = UserService.CurrentPlayers.NamePlayerOne;
+            currentPlayerName = UserService.CurrentPlayers?.NamePlayerOne;
         }
 
         currentPlayer = currentPlayer == Player.X ? currentPlayer = Player.O : currentPlayer = Player.X;
-        
+
         StateHasChanged();
     }
 
