@@ -40,7 +40,7 @@
                         <MudTextField @bind-Value="@PlayerModel.NamePlayerTwo" For="@(() => PlayerModel.NamePlayerTwo)" Label="Name of the Player" Variant="Variant.Outlined" />
                     </MudItem>
                     <MudItem md="6">
-                        <MudColorPicker Label="Color" @bind-Text="PlayerModel.ColorPlayerTwo" ColorPickerView="@ColorPickerView.GridCompact" />
+                        <MudColorPicker Label="Color" @bind-Text="@PlayerModel.ColorPlayerTwo" ColorPickerView="@ColorPickerView.GridCompact" />
                     </MudItem>
                 </MudGrid>
             </MudItem>

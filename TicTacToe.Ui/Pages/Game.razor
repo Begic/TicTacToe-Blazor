@@ -75,15 +75,30 @@
             pointsPlayerO.Add(squareId);
         }
 
-        if (UserService.CurrentPlayers!.PlayVsHuman)
-        {
-            VersusHumanLogic(squareId);
-        }
-        else
+        if (!UserService.CurrentPlayers!.PlayVsHuman)
         {
             VersusArtificialIntelligenceLogic();
         }
 
+        var result = GameLogic.CheckWinner(pointsPlayerO, pointsPlayerX);
+
+        if (result == Player.X)
+        {
+            OpenWinningDialog(result);
+            return;
+        }
+
+        if (result == Player.O)
+        {
+            OpenWinningDialog(result);
+            return;
+        }
+
+        if (pointsPlayerX.Count + pointsPlayerO.Count >= 9)
+        {
+            OpenWinningDialog(result);
+        }
+        
         ChangeCurrentPalyer();
     }
 
@@ -106,24 +121,7 @@
 
         pointsPlayerO.Add(newSquareId);
     }
-
-    private void VersusHumanLogic(int squareId)
-    {
-        var result = GameLogic.CheckWinner(pointsPlayerO, pointsPlayerX);
-
-        if (result == Player.X)
-        {
-            OpenWinningDialog(result);
-            return;
-        }
-
-        if (result == Player.O)
-        {
-            OpenWinningDialog(result);
-            return;
-        }
-    }
-
+    
     private void ChangeCurrentPalyer()
     {
         if (currentPlayer == Player.X)

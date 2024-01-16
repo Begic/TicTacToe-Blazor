@@ -13,13 +13,13 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        @if (!UserService.CurrentPlayers.PlayVsHuman)
+        @if (!UserService.CurrentPlayers!.PlayVsHuman)
         {
          // TODO   
         }
     </DialogContent>
     <DialogActions>
-        @if (!UserService.CurrentPlayers.PlayVsHuman)
+        @if (!UserService.CurrentPlayers!.PlayVsHuman && Winner != Player.Default)
         {
             <MudButton Color="@Color.Success" Variant="@Variant.Filled" EndIcon="@Icons.Material.Filled.Save" OnClick="@OnClickSave">Save</MudButton>
         }
@@ -45,6 +45,11 @@
         if (Winner == Player.O)
         {
             winnerName = UserService.CurrentPlayers.NamePlayerTwo;
+        }
+
+        if (Winner == Player.Default)
+        {
+            winnerName = "NONE OF YOU BOTH";
         }
     }
 
