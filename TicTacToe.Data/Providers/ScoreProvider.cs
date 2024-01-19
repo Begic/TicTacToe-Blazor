@@ -24,7 +24,7 @@ public class HighScoreProvider : IHighScoreProvider
             Date = x.Date,
             PlayerName = x.PlayerName,
             PlayTime = x.PlayTime.Value
-        }).OrderByDescending(x=> x.PlayTime).ToListAsync();
+        }).OrderBy(x=> x.PlayTime).ToListAsync();
     }
 
     public async Task SaveHighScore(Player winner, string winnerName, double? playedTime)
